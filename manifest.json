@@ -1,0 +1,22 @@
+{ "name": "network class lab homework helper", "version": "1.0", "description": ".",
+  "background": {
+    "persistent": true,
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+      "default_icon": "images/logo.jpg"
+  },
+  "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "jquery.js", "helper.js"],
+      "matches": [ "*://*/*" ],
+      "run_at": "document_end"
+    }],
+  "manifest_version": 2,
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "downloads"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
