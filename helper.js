@@ -6,8 +6,6 @@ $(document).ready(function() {
 
     if (typeof($a) !== "undefined" && $a.length > 0) {
         sendToBackground( $a.get(0).href);
-        document.querySelector("#fastpostmessage").value="已收到";
-        document.querySelector("#fastpostsubmit").click()
     }
 });
 
@@ -18,3 +16,15 @@ $(document).ready(function() {
 function sendToBackground(url) {
     chrome.runtime.sendMessage({"data":{"url":url}})
 }
+
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+	console.log(request);
+	if (request.cmd === "failed") {
+		alert("already download");
+		/* do nothing */
+	} else if (request.cmd === "success") {
+        document.querySelector("#fastpostmessage").value="已收到";
+        document.querySelector("#fastpostsubmit").click()
+	}
+});
