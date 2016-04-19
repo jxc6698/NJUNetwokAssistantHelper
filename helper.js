@@ -20,11 +20,15 @@ function sendToBackground(url) {
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	console.log(request);
-	if (request.cmd === "failed") {
-		alert("already download");
-		/* do nothing */
-	} else if (request.cmd === "success") {
-        document.querySelector("#fastpostmessage").value="已收到";
-        document.querySelector("#fastpostsubmit").click()
+	switch (request.cmd) {
+		case "failed":
+			console.log("already download");
+			break;
+		case "success":
+			document.querySelector("#fastpostmessage").value="已收到";
+			document.querySelector("#fastpostsubmit").click()
+			break;
+		default:
+			console.log("error unknown cmd: "+request.cmd);
 	}
 });
